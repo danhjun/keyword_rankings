@@ -25,7 +25,7 @@ fig, ax = plt.subplots(figsize=(12, 8))  # Adjust the figure size as desired
 
 # Select a subset of dates to display
 num_dates = data.shape[1]  # Total number of dates
-num_display_dates = 10  # Number of dates to display
+num_display_dates = 20  # Number of dates to display (increase this value for more dates)
 display_dates = np.linspace(0, num_dates - 1, num=num_display_dates, dtype=int)  # Select evenly spaced dates
 dates = data.columns[display_dates]
 
