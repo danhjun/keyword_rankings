@@ -42,6 +42,7 @@ num_ticks = num_display_dates
 step_size = len(dates) // (num_ticks - 1)
 visible_dates = dates[::step_size]
 ax.set_xticks(visible_dates)
+ax.tick_params(axis='x', labelsize=8)
 
 # Set y-axis limits with padding
 padding = 5  # Adjust the padding as desired
