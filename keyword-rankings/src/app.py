@@ -27,7 +27,10 @@ num_dates = data.shape[1]  # Total number of dates
 display_dates = np.linspace(0, num_dates - 1, num=20, dtype=int)  # Select 20 evenly spaced dates
 dates = data.columns[display_dates]
 
-ax.plot(dates, data.loc[selected_country, dates])
+# Convert values to numeric
+data_numeric = data.loc[selected_country, dates].apply(pd.to_numeric, errors='coerce')
+
+ax.plot(dates, data_numeric)
 ax.set_xlabel('Date')
 ax.set_ylabel('Value')
 ax.set_title(f'{selected_country} Data')
@@ -37,6 +40,12 @@ num_ticks = 8
 step_size = len(dates) // (num_ticks - 1)
 visible_dates = dates[::step_size]
 ax.set_xticks(visible_dates)
+
+# Set y-axis limits with padding
+padding = 5  # Adjust the padding as desired
+min_value = data_numeric.min() - padding
+max_value = data_numeric.max() + padding
+ax.set_ylim(min_value, max_value)
 
 # Rotate x-axis labels for better readability
 plt.xticks(rotation=45)
