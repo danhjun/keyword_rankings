@@ -3,6 +3,34 @@
   <component name="CsvFileAttributes">
     <option name="attributeMap">
       <map>
+        <entry key="\keyword-rankings\data\01_raw\5-22gym hardstyle.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\keyword-rankings\data\01_raw\5-22hardstyle music.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\keyword-rankings\data\01_raw\5-22hardstyle workout.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\keyword-rankings\data\01_raw\5-24 - gym hardstyle.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\keyword-rankings\data\01_raw\gym_phonk.csv">
           <value>
             <Attribute>
@@ -11,6 +39,13 @@
           </value>
         </entry>
         <entry key="\keyword-rankings\data\01_raw\phonk.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\keyword-rankings\data\01_raw\phonk_music.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />

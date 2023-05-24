@@ -3,10 +3,10 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
-# Load CSV data using Kedro's data catalog
+# Load CSV data
 @st.cache
 def load_data():
-    df = pd.read_csv(r"C:\Users\Dan\Desktop\keyword_rankings\keyword-rankings\data\01_raw\5-22gym hardstyle.csv", index_col=0)
+    df = pd.read_csv(r"C:\Users\Dan\Desktop\keyword_rankings\keyword-rankings\data\01_raw\5-24 - gym hardstyle.csv", index_col=0)
     return df
 
 # Load data
@@ -20,7 +20,7 @@ selected_country = st.selectbox("Select a country", countries)
 data = data.loc[:, ~data.columns.str.startswith('Unnamed')]
 
 # Plot the data for the selected country
-fig, ax = plt.subplots(figsize=(26, 14))  # Adjust the figure size as desired
+fig, ax = plt.subplots(figsize=(28, 14))  # Adjust the figure size as desired
 
 # Select a subset of dates to display
 num_dates = data.shape[1]  # Total number of dates
@@ -70,15 +70,6 @@ plt.xticks(rotation=45)
 # Display the plot using Streamlit
 st.pyplot(fig)
 
-# Load CSV data using Kedro's data catalog
-@st.cache
-def load_data():
-    df = pd.read_csv(r"C:\Users\Dan\Desktop\keyword_rankings\keyword-rankings\data\01_raw\5-22gym hardstyle.csv", index_col=0)
-    return df
-
-# Load data
-data = load_data()
-
 # Select dates
 dates = data.columns
 start_date = st.selectbox("Select start date", dates)
@@ -92,6 +83,28 @@ end_ranking = data[end_date].apply(pd.to_numeric, errors='coerce')
 countries_rank_up = end_ranking[end_ranking > start_ranking]
 countries_rank_down = end_ranking[end_ranking < start_ranking]
 countries_rank_same = end_ranking[end_ranking == start_ranking]
+
+# Display changes for high priority countries
+st.subheader(f"Changes in High Priority Countries from {start_date} to {end_date}")
+high_priority_countries = ["United States of America", "Germany", "Brazil", "Japan", "United Kingdom", "Spain", "France", "Italy", "Australia", "Canada", "Sweden"]
+change_data = {
+    'Country': [],
+    'Change Type': [],
+    'Change Amount': []
+}
+for country in high_priority_countries:
+    start_rank = start_ranking.loc[country]
+    end_rank = end_ranking.loc[country]
+    if pd.isna(start_rank) or pd.isna(end_rank):
+        continue
+    change = end_rank - start_rank
+    change_type = 'Rank Up' if change > 0 else 'Rank Down' if change < 0 else 'No Change'
+    change_data['Country'].append(country)
+    change_data['Change Type'].append(change_type)
+    change_data['Change Amount'].append(change)
+
+change_df = pd.DataFrame(change_data)
+st.dataframe(change_df)
 
 # Display countries with rank up, rank down, and rank stays the same side by side
 col1, col2, col3 = st.beta_columns(3)
